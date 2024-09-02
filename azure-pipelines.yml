@@ -13,12 +13,6 @@ stages:
   jobs:
   - job: Build_Job
     steps:
-    - task: UseMavenVersion@0
-      inputs:
-        versionSpec: $(MAVEN_VERSION)
-        jdkVersionOption: '1.8'
-        jdkArchitectureOption: 'x64'
-    
     - task: Maven@3
       inputs:
         mavenPomFile: 'pom.xml'
@@ -43,5 +37,3 @@ stages:
         PathtoPublish: '$(Build.ArtifactStagingDirectory)'
         ArtifactName: 'drop'
         publishLocation: 'Container'
-
-
