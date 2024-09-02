@@ -18,4 +18,9 @@ public class DefaultController {
 	public String getTestMessage() {
 		return "Devops CICD successful!";
 	}
+	
+	@GetMapping("/testmail1")
+	public String getTestMessage1() {
+		return "Devops CICD successful!";
+	}
 }
