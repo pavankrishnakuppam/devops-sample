@@ -23,7 +23,7 @@ stages:
         goals: 'clean package'
     
     - script: |
-        ls $(Build.SourcesDirectory)
+        ls $(Build.SourcesDirectory)/target
       displayName: 'View files after build'
     
     - task: CopyFiles@2
@@ -43,10 +43,13 @@ stages:
   jobs:
   - job: Deploy_Job
     steps:
+    - download: current
+      artifact: drop
+      
     - task: AzureRmWebAppDeployment@4
       inputs:
         ConnectionType: 'AzureRM'
         azureSubscription: 'devops-sample-serviceconnection'
         appType: 'webApp'
         WebAppName: 'devops-sample'
-        packageForLinux: '$(Build.ArtifactStagingDirectory)/*.jar'
+        packageForLinux: '$(Pipeline.Workspace)/drop/*.jar'
